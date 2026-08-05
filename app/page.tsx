@@ -1,15 +1,5 @@
-import {
-  ArrowDown,
-  Bot,
-  Brain,
-  Factory,
-  Gamepad2,
-  Heart,
-  Layers,
-  Rocket,
-  TrendingUp,
-  type LucideIcon,
-} from "lucide-react";
+import Link from "next/link";
+import { ArrowDown, ArrowRight } from "lucide-react";
 
 import { GradientHeading } from "@/components/cult/gradient-heading";
 import { GridBeam } from "@/components/cult/grid-beam";
@@ -20,164 +10,16 @@ import { TextAnimate } from "@/components/cult/text-animate";
 import { TextureOverlay } from "@/components/cult/texture-overlay";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-
-/* ------------------------------------------------------------------ */
-/* Data                                                                 */
-/* ------------------------------------------------------------------ */
-
-const strengths: { icon: LucideIcon; title: string; desc: string }[] = [
-  {
-    icon: Rocket,
-    title: "AI 产品从 0 到 1",
-    desc: "需求分析 → 方案设计 → 研发协作 → 上线验证 → 持续优化全链路",
-  },
-  {
-    icon: Brain,
-    title: "Agent 与多轮交互",
-    desc: "角色设定、回复逻辑、记忆机制、状态管理、生成策略",
-  },
-  {
-    icon: Layers,
-    title: "复杂系统设计",
-    desc: "智能排程、数字人、内容推荐等业务规则与系统逻辑拆解",
-  },
-  {
-    icon: TrendingUp,
-    title: "数据驱动优化",
-    desc: "模型效果评估体系，从指标反馈推动算法与体验持续迭代",
-  },
-];
-
-const jobs: { role: string; company: string; period: string; points: string[] }[] = [
-  {
-    role: "AI 产品经理",
-    company: "厦门新宇星链科技有限公司",
-    period: "2025.11 – 至今",
-    points: [
-      "AI 角色交互产品规划与核心能力设计：智能对话、多轮交互、内容生成、用户关系成长",
-      "角色设定、回复逻辑、记忆机制、状态管理等 AI 交互方案设计，提升长期互动效果",
-      "AI 产品标准化能力体系：角色配置、生成策略、安全规则、交互流程",
-      "商业化路径设计：付费模型、生成排队、虚拟资产、创作者收益",
-    ],
-  },
-  {
-    role: "AI 产品经理",
-    company: "畅达瑞途信息技术有限公司",
-    period: "2025.3 – 2025.10",
-    points: [
-      "AI 智能排程产品设计：将设备、物料、人员、订单优先级转化为系统规则与决策逻辑",
-      "AI 工作流产品框架：任务流程、规则配置、结果反馈、人工调整机制",
-      "模型效果评估体系：排程合理性、任务完成率、稳定性，推动算法持续优化",
-    ],
-  },
-  {
-    role: "项目经理（偏产品）",
-    company: "厦门黑镜科技有限公司",
-    period: "2023.6 – 2024.10",
-    points: [
-      "AI 数字人与智能展示系统产品设计：内容展示、语音交互、动作表现、系统联动",
-      "主导建发、泉州文旅 AI 数字人项目，从需求沟通到方案落地",
-      "协调算法、3D、美术、前端团队系统联调，提升交付效率",
-    ],
-  },
-  {
-    role: "游戏制作人",
-    company: "Zygobot Studio（美国）",
-    period: "2022.5 – 2023.6",
-    points: [
-      "多人联机射击游戏从 0 到 1 产品设计：玩法系统、用户体验、版本规划",
-      "用户测试与数据反馈驱动机制优化；管理程序、美术、策划多团队协作",
-    ],
-  },
-];
-
-const education: { degree: string; school: string; period: string }[] = [
-  { degree: "游戏设计 · 硕士", school: "美国福赛大学", period: "2022.8 – 2024.6" },
-  { degree: "游戏开发 · 学士", school: "美国福赛大学", period: "2019.8 – 2022.4" },
-];
-
-const projects: {
-  name: string;
-  icon: LucideIcon;
-  desc: string;
-  tags: string[];
-  highlight: string;
-}[] = [
-  {
-    name: "AI 角色交互产品",
-    icon: Heart,
-    desc: "AI 角色陪伴产品从 0 到 1：智能对话、多轮交互、内容生成与用户关系成长，主导核心能力与商业化设计",
-    tags: ["大模型应用", "多轮交互", "记忆机制", "商业化"],
-    highlight: "新宇星链 · 2025.11–至今",
-  },
-  {
-    name: "AI 智能排程系统",
-    icon: Factory,
-    desc: "制造排程：将设备、物料、人员、订单优先级转化为系统规则与 AI 决策逻辑，搭建设计效果评估体系",
-    tags: ["智能排程", "AI 工作流", "规则引擎", "效果评估"],
-    highlight: "畅达瑞途 · 2025.3–2025.10",
-  },
-  {
-    name: "AI 数字人 · 智能展示",
-    icon: Bot,
-    desc: "数字人交互流程设计：内容展示、语音交互、动作表现、系统联动；主导建发、泉州文旅 AI 数字人项目",
-    tags: ["AI 数字人", "智能展示", "交互设计", "项目交付"],
-    highlight: "黑镜科技 · 2023.6–2024.10",
-  },
-  {
-    name: "多人联机射击游戏",
-    icon: Gamepad2,
-    desc: "多人联机射击游戏从 0 到 1：玩法系统、用户体验、版本规划；用户测试与数据反馈驱动迭代",
-    tags: ["游戏产品", "玩法设计", "用户测试", "跨团队管理"],
-    highlight: "Zygobot · 2022.5–2023.6",
-  },
-];
-
-const skills: { group: string; items: string[] }[] = [
-  {
-    group: "AI 产品能力",
-    items: [
-      "AI 应用设计",
-      "大模型产品设计",
-      "AI Agent",
-      "Prompt 设计",
-      "智能工作流",
-      "模型效果评估",
-      "AI 商业化设计",
-    ],
-  },
-  {
-    group: "产品能力",
-    items: [
-      "需求分析",
-      "用户调研",
-      "业务流程设计",
-      "PRD",
-      "原型设计",
-      "产品规划",
-      "版本管理",
-    ],
-  },
-  {
-    group: "技术原型",
-    items: [
-      "Next.js",
-      "React",
-      "TypeScript",
-      "Zustand",
-      "Tailwind CSS",
-      "微信小程序",
-      "云开发",
-      "DeepSeek API",
-    ],
-  },
-];
+import { getPosts } from "@/lib/posts";
+import { EMAIL, education, jobs, projects, skills, strengths } from "@/lib/site-data";
 
 /* ------------------------------------------------------------------ */
 /* Page                                                                 */
 /* ------------------------------------------------------------------ */
 
 export default function Home() {
+  const posts = getPosts().slice(0, 3);
+
   return (
     <>
       {/* 顶栏导航 */}
@@ -186,7 +28,7 @@ export default function Home() {
           <a href="#home" className="text-sm font-semibold tracking-tight">
             连晟 · AI 产品经理
           </a>
-          <div className="hidden items-center gap-6 text-sm text-muted-foreground sm:flex">
+          <div className="hidden items-center gap-5 text-sm text-muted-foreground sm:flex">
             <a href="#about" className="transition-colors hover:text-foreground">
               关于
             </a>
@@ -202,8 +44,20 @@ export default function Home() {
             >
               项目
             </a>
-            <a href="#skills" className="transition-colors hover:text-foreground">
-              技能
+            <a
+              href="#writing"
+              className="transition-colors hover:text-foreground"
+            >
+              博客
+            </a>
+            <a href="/resume" className="transition-colors hover:text-foreground">
+              简历
+            </a>
+            <a
+              href="#contact"
+              className="transition-colors hover:text-foreground"
+            >
+              联系
             </a>
           </div>
         </nav>
@@ -259,8 +113,8 @@ export default function Home() {
               size="lg"
               className="rounded-full px-7"
             >
-              <a href="#experience">
-                看经历 <ArrowDown className="size-4" />
+              <a href="#about">
+                关于我 <ArrowDown className="size-4" />
               </a>
             </Button>
           </div>
@@ -272,33 +126,57 @@ export default function Home() {
         />
       </section>
 
-      {/* 核心优势 */}
+      {/* 关于我 — 故事优先 */}
       <section id="about" className="container scroll-mt-20 py-24 sm:py-28">
         <p className="section-label">About</p>
         <GradientHeading asChild variant="brand" size="lg" weight="semi">
-          <h2>AI 产品从 0 到 1</h2>
+          <h2>关于我</h2>
         </GradientHeading>
-        <p className="mt-6 max-w-3xl text-[15px] leading-7 text-muted-foreground">
-          4 年 AI 产品经验，覆盖消费级 AI 应用（角色交互、数字人）与
-          ToB 智能系统（智能排程、智能展示）。既理解大模型能力边界，也能通过产品设计放大
-          AI 价值——从需求分析、方案设计到研发落地、商业化验证全链路。
-        </p>
-        <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
-          {strengths.map((s) => (
-            <MinimalCard key={s.title} className="bg-card hover:bg-secondary/50">
-              <div className="rounded-[20px] p-6">
-                <div className="flex size-11 items-center justify-center rounded-xl bg-brand-soft text-primary ring-1 ring-inset ring-primary/10 shadow-sm">
-                  <s.icon className="size-5" />
+
+        <div className="mt-8 max-w-3xl space-y-6 text-[15px] leading-8 text-muted-foreground">
+          <p>
+            我学游戏设计与开发出身，在海外做过几年游戏产品，回国后一路做到 AI
+            产品经理。从游戏到 AI，驱动我的是同一个问题：{" "}
+            <span className="font-medium text-foreground">
+              怎么让人对一个系统产生情感，并愿意长期投入。
+            </span>
+          </p>
+          <p>
+            游戏用玩法、养成和即时反馈；AI 产品用对话、角色和关系成长。我做的角色陪伴产品、数字人、
+            互动叙事，本质上都在设计「用户愿意回来的体验」。而 AI
+            的价值最终要落进真实流程——所以我也在制造业做智能排程、在政企场景做数字人交付，把大模型能力变成能算账、能交付的产品。
+          </p>
+          <p>
+            工作之外，我维护一个由 LLM 构建的个人知识库，系统学习 Agent、RAG
+            和多智能体系统。对我而言，AI 正在重写「人机协作」的方式，而产品经理的职责，
+            是让新技术长出有人情味的样子。
+          </p>
+        </div>
+
+        <div className="mt-12">
+          <p className="text-xs font-semibold uppercase tracking-[0.18em] text-muted-foreground">
+            我擅长
+          </p>
+          <div className="mt-5 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+            {strengths.map((s) => (
+              <MinimalCard
+                key={s.title}
+                className="bg-card hover:bg-secondary/50"
+              >
+                <div className="rounded-[20px] p-6">
+                  <div className="flex size-11 items-center justify-center rounded-xl bg-brand-soft text-primary ring-1 ring-inset ring-primary/10 shadow-sm">
+                    <s.icon className="size-5" />
+                  </div>
+                  <h3 className="mt-5 text-base font-semibold tracking-tight">
+                    {s.title}
+                  </h3>
+                  <p className="mt-2 text-sm leading-6 text-muted-foreground">
+                    {s.desc}
+                  </p>
                 </div>
-                <h3 className="mt-5 text-base font-semibold tracking-tight">
-                  {s.title}
-                </h3>
-                <p className="mt-2 text-sm leading-6 text-muted-foreground">
-                  {s.desc}
-                </p>
-              </div>
-            </MinimalCard>
-          ))}
+              </MinimalCard>
+            ))}
+          </div>
         </div>
       </section>
 
@@ -455,13 +333,84 @@ export default function Home() {
         </div>
       </section>
 
+      {/* 见解 */}
+      <section
+        id="writing"
+        className="container scroll-mt-20 py-24 sm:py-28 border-t border-border/50"
+      >
+        <p className="section-label">Writing</p>
+        <GradientHeading asChild variant="brand" size="lg" weight="semi">
+          <h2>见解与随笔</h2>
+        </GradientHeading>
+        <p className="mt-6 max-w-3xl text-[15px] leading-7 text-muted-foreground">
+          关于 AI 产品、Agent 系统与产品思考的随手记录。
+        </p>
+        <div className="mt-10 space-y-3">
+          {posts.map((post) => (
+            <Link
+              key={post.slug}
+              href={`/blog/${post.slug}`}
+              className="group block rounded-2xl border border-border/60 bg-card/60 px-6 py-5 shadow-sm transition-all hover:border-primary/30 hover:bg-card hover:shadow-md"
+            >
+              <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
+                <h3 className="text-base font-semibold tracking-tight transition-colors group-hover:text-primary">
+                  {post.title}
+                </h3>
+                <span className="ml-auto font-mono text-xs text-muted-foreground">
+                  {post.date}
+                </span>
+              </div>
+              <p className="mt-1.5 text-sm leading-6 text-muted-foreground">
+                {post.excerpt}
+              </p>
+            </Link>
+          ))}
+        </div>
+        <Link
+          href="/blog"
+          className="mt-6 inline-flex items-center gap-1.5 text-sm font-medium text-primary transition-colors hover:underline"
+        >
+          全部文章 <ArrowRight className="size-4" />
+        </Link>
+      </section>
+
+      {/* 联系我 */}
+      <section
+        id="contact"
+        className="container scroll-mt-20 py-24 sm:py-28 border-t border-border/50"
+      >
+        <p className="section-label">Contact</p>
+        <GradientHeading asChild variant="brand" size="lg" weight="semi">
+          <h2>联系我</h2>
+        </GradientHeading>
+        <p className="mt-6 max-w-3xl text-[15px] leading-7 text-muted-foreground">
+          聊 AI 产品、Agent 应用、合作机会，或者只是想打个招呼——都欢迎。
+        </p>
+        <div className="mt-10 flex flex-wrap items-center gap-4">
+          <Button asChild size="lg" className="rounded-full px-7">
+            <a href={`mailto:${EMAIL}`}>发邮件给我</a>
+          </Button>
+          <span className="font-mono text-sm text-muted-foreground">
+            {EMAIL}
+          </span>
+        </div>
+      </section>
+
       {/* Footer */}
       <footer className="border-t border-border py-8">
-        <div className="container flex items-center justify-between text-sm text-muted-foreground">
+        <div className="container flex flex-wrap items-center justify-between gap-3 text-sm text-muted-foreground">
           <p>© 2026 连晟 · AI 产品经理</p>
-          <a href="#home" className="transition-colors hover:text-foreground">
-            回到顶部 ↑
-          </a>
+          <div className="flex items-center gap-5">
+            <a
+              href={`mailto:${EMAIL}`}
+              className="font-mono text-xs transition-colors hover:text-foreground"
+            >
+              {EMAIL}
+            </a>
+            <a href="#home" className="transition-colors hover:text-foreground">
+              回到顶部 ↑
+            </a>
+          </div>
         </div>
       </footer>
     </>
