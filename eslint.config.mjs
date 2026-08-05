@@ -12,6 +12,8 @@ const eslintConfig = defineConfig([
     "out/**",
     "build/**",
     "next-env.d.ts",
+    // cult/ui 组件是上游第三方代码，自带 lint 噪音，不修
+    "components/cult/**",
   ]),
 ]);
 

@@ -1,55 +1,29 @@
 import {
   ArrowDown,
+  Bot,
   Brain,
-  Clapperboard,
+  Factory,
+  Gamepad2,
   Heart,
   Layers,
-  LayoutGrid,
   Rocket,
-  ShieldCheck,
   TrendingUp,
   type LucideIcon,
 } from "lucide-react";
 
-import { GradientAnimation } from "@/components/cult/bg-animated-gradient";
-import { TextAnimate } from "@/components/cult/text-animate";
+import { GradientHeading } from "@/components/cult/gradient-heading";
+import { GridBeam } from "@/components/cult/grid-beam";
 import { MetalButton } from "@/components/cult/metal-button";
+import { MinimalCard } from "@/components/cult/minimal-card";
 import { ShiftCard } from "@/components/cult/shift-card";
+import { TextAnimate } from "@/components/cult/text-animate";
+import { TextureOverlay } from "@/components/cult/texture-overlay";
 import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
 
 /* ------------------------------------------------------------------ */
 /* Data                                                                 */
 /* ------------------------------------------------------------------ */
-
-const heroGradients = [
-  {
-    stops: [
-      { color: "rgba(99, 102, 241, 0.28)", position: 0 },
-      { color: "rgba(56, 189, 248, 0.16)", position: 45 },
-      { color: "rgba(167, 139, 250, 0.26)", position: 100 },
-    ],
-    centerX: 25,
-    centerY: 35,
-  },
-  {
-    stops: [
-      { color: "rgba(56, 189, 248, 0.24)", position: 0 },
-      { color: "rgba(167, 139, 250, 0.18)", position: 50 },
-      { color: "rgba(52, 211, 153, 0.2)", position: 100 },
-    ],
-    centerX: 75,
-    centerY: 60,
-  },
-  {
-    stops: [
-      { color: "rgba(167, 139, 250, 0.26)", position: 0 },
-      { color: "rgba(99, 102, 241, 0.2)", position: 50 },
-      { color: "rgba(14, 165, 233, 0.22)", position: 100 },
-    ],
-    centerX: 50,
-    centerY: 80,
-  },
-];
 
 const strengths: { icon: LucideIcon; title: string; desc: string }[] = [
   {
@@ -130,32 +104,32 @@ const projects: {
   highlight: string;
 }[] = [
   {
-    name: "FEELME · AI 角色陪伴",
+    name: "AI 角色交互产品",
     icon: Heart,
-    desc: "AI 角色陪伴 App 交互原型：6 个角色、完整聊天系统、能量货币体系与智能硬件（手环 / 戒指）",
-    tags: ["Next.js", "React", "Zustand", "Framer Motion"],
-    highlight: "160+ 测试全绿 · 自研原型",
+    desc: "AI 角色陪伴产品从 0 到 1：智能对话、多轮交互、内容生成与用户关系成长，主导核心能力与商业化设计",
+    tags: ["大模型应用", "多轮交互", "记忆机制", "商业化"],
+    highlight: "新宇星链 · 2025.11–至今",
   },
   {
-    name: "小棉袄 · 微信小程序",
-    icon: ShieldCheck,
-    desc: "为独居老人提供 AI 聊天陪伴，为子女提供每日安心简报；超 48h 沉默自动预警",
-    tags: ["微信小程序", "云开发", "DeepSeek"],
-    highlight: "老人 + 子女双端闭环 · 自研",
+    name: "AI 智能排程系统",
+    icon: Factory,
+    desc: "制造排程：将设备、物料、人员、订单优先级转化为系统规则与 AI 决策逻辑，搭建设计效果评估体系",
+    tags: ["智能排程", "AI 工作流", "规则引擎", "效果评估"],
+    highlight: "畅达瑞途 · 2025.3–2025.10",
   },
   {
-    name: "剧情互动直播",
-    icon: Clapperboard,
-    desc: "AI 群体互动直播：观众实时投票影响剧情走向，聊天流驱动多分支叙事",
-    tags: ["HTML/JS", "Python", "AI 叙事"],
-    highlight: "实时互动 · 自研 demo",
+    name: "AI 数字人 · 智能展示",
+    icon: Bot,
+    desc: "数字人交互流程设计：内容展示、语音交互、动作表现、系统联动；主导建发、泉州文旅 AI 数字人项目",
+    tags: ["AI 数字人", "智能展示", "交互设计", "项目交付"],
+    highlight: "黑镜科技 · 2023.6–2024.10",
   },
   {
-    name: "feelAI · 内容平台",
-    icon: LayoutGrid,
-    desc: "Bento 风格 AI 内容消费平台前端原型，信息架构优先的交互探索",
-    tags: ["HTML/CSS/JS", "Bento", "交互原型"],
-    highlight: "信息架构探索 · 自研",
+    name: "多人联机射击游戏",
+    icon: Gamepad2,
+    desc: "多人联机射击游戏从 0 到 1：玩法系统、用户体验、版本规划；用户测试与数据反馈驱动迭代",
+    tags: ["游戏产品", "玩法设计", "用户测试", "跨团队管理"],
+    highlight: "Zygobot · 2022.5–2023.6",
   },
 ];
 
@@ -207,7 +181,7 @@ export default function Home() {
   return (
     <>
       {/* 顶栏导航 */}
-      <header className="fixed inset-x-0 top-0 z-50 border-b border-border/50 bg-background/70 backdrop-blur-md">
+      <header className="fixed inset-x-0 top-0 z-50 border-b border-border/60 bg-background/80 backdrop-blur-xl">
         <nav className="container flex h-14 items-center justify-between">
           <a href="#home" className="text-sm font-semibold tracking-tight">
             连晟 · AI 产品经理
@@ -226,7 +200,7 @@ export default function Home() {
               href="#projects"
               className="transition-colors hover:text-foreground"
             >
-              作品
+              项目
             </a>
             <a href="#skills" className="transition-colors hover:text-foreground">
               技能
@@ -235,67 +209,95 @@ export default function Home() {
         </nav>
       </header>
 
-      {/* Hero */}
+      {/* Hero — 光晕 + 细网格 + 颗粒 + 编辑式标题 */}
       <section
         id="home"
         className="relative flex min-h-[100svh] flex-col items-center justify-center overflow-hidden"
       >
-        <GradientAnimation
-          className="opacity-50"
-          gradients={heroGradients}
-          animationDuration={20}
+        {/* 层 1：品牌色柔和光晕（静态） */}
+        <div aria-hidden className="pointer-events-none absolute inset-0">
+          <div className="absolute left-1/2 top-[-22%] h-[60vh] w-[90vw] -translate-x-1/2 rounded-full bg-brand-1/[0.07] blur-[120px]" />
+          <div className="absolute right-[-10%] top-[28%] h-[45vh] w-[45vw] rounded-full bg-brand-2/[0.06] blur-[100px]" />
+          <div className="absolute bottom-[-15%] left-[-5%] h-[40vh] w-[50vw] rounded-full bg-brand-1/[0.05] blur-[120px]" />
+        </div>
+        {/* 层 2：细网格微光（Canvas 2D） */}
+        <GridBeam
+          className="absolute inset-0 opacity-60"
+          colorVariant="mono"
+          theme="light"
+          strength={0.4}
+          duration={4}
+          breathe
         />
-        <div className="container relative z-10 flex flex-col items-center py-24 text-center">
-          <span className="mb-8 rounded-full border border-border bg-background/60 px-4 py-1.5 text-xs font-medium tracking-wide text-muted-foreground backdrop-blur">
+        {/* 层 3：颗粒噪点，消除渐变 banding */}
+        <TextureOverlay
+          texture="noise"
+          opacity={0.35}
+          className="mix-blend-multiply dark:opacity-20 dark:mix-blend-screen"
+        />
+        {/* 层 4：内容 */}
+        <div className="container relative z-10 flex flex-col items-center py-32 text-center">
+          <span className="mb-10 flex items-center gap-2.5 rounded-full border border-border/60 bg-card/70 px-4 py-1.5 text-xs font-medium tracking-wide text-muted-foreground shadow-sm backdrop-blur-md">
+            <span className="size-1.5 rounded-full bg-primary shadow-[0_0_10px_var(--primary)]" />
             AI 产品经理 · 厦门 · 4 年经验
           </span>
           <TextAnimate
             text="连晟"
-            type="fadeInUp"
-            className="text-6xl font-bold tracking-tight text-foreground sm:text-7xl md:text-8xl"
+            type="calmInUp"
+            className="text-6xl font-semibold tracking-[-0.02em] text-foreground sm:text-7xl md:text-8xl"
           />
-          <p className="mt-6 max-w-2xl text-lg leading-8 text-muted-foreground sm:text-xl">
+          <p className="mt-8 max-w-2xl text-lg leading-8 text-muted-foreground sm:text-xl">
             AI 产品从 0 到 1 落地 · Agent 与多轮交互 · 智能工作流 · AI 商业化
           </p>
-          <div className="mt-10 flex flex-wrap items-center justify-center gap-4">
-            <MetalButton asChild size="lg" className="px-6">
+          <div className="mt-12 flex flex-wrap items-center justify-center gap-4">
+            <MetalButton asChild size="lg" className="px-7">
               <a href="#projects">看项目</a>
             </MetalButton>
-            <MetalButton asChild size="lg" variant="outline" className="px-6">
-              <a href="#experience">看经历</a>
-            </MetalButton>
+            <Button
+              asChild
+              variant="outline"
+              size="lg"
+              className="rounded-full px-7"
+            >
+              <a href="#experience">
+                看经历 <ArrowDown className="size-4" />
+              </a>
+            </Button>
           </div>
         </div>
-        <a
-          href="#about"
-          className="absolute bottom-8 left-1/2 -translate-x-1/2 text-muted-foreground transition-colors hover:text-foreground"
-          aria-label="向下滚动"
-        >
-          <ArrowDown className="size-5 animate-bounce" />
-        </a>
+        {/* 底部淡出衔接 About */}
+        <div
+          aria-hidden
+          className="pointer-events-none absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-background to-transparent"
+        />
       </section>
 
       {/* 核心优势 */}
-      <section id="about" className="container scroll-mt-20 py-24">
+      <section id="about" className="container scroll-mt-20 py-24 sm:py-28">
         <p className="section-label">About</p>
-        <h2 className="section-title">AI 产品从 0 到 1</h2>
-        <p className="mt-6 max-w-3xl text-lg leading-8 text-muted-foreground">
+        <GradientHeading asChild variant="brand" size="lg" weight="semi">
+          <h2>AI 产品从 0 到 1</h2>
+        </GradientHeading>
+        <p className="mt-6 max-w-3xl text-[15px] leading-7 text-muted-foreground">
           4 年 AI 产品经验，覆盖消费级 AI 应用（角色交互、数字人）与
           ToB 智能系统（智能排程、智能展示）。既理解大模型能力边界，也能通过产品设计放大
           AI 价值——从需求分析、方案设计到研发落地、商业化验证全链路。
         </p>
-        <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
           {strengths.map((s) => (
-            <div
-              key={s.title}
-              className="rounded-xl border border-border bg-card p-6 shadow-elevation-light dark:shadow-elevation-dark"
-            >
-              <s.icon className="size-6 text-primary" />
-              <h3 className="mt-4 font-semibold">{s.title}</h3>
-              <p className="mt-2 text-sm leading-6 text-muted-foreground">
-                {s.desc}
-              </p>
-            </div>
+            <MinimalCard key={s.title} className="bg-card hover:bg-secondary/50">
+              <div className="rounded-[20px] p-6">
+                <div className="flex size-11 items-center justify-center rounded-xl bg-brand-soft text-primary ring-1 ring-inset ring-primary/10 shadow-sm">
+                  <s.icon className="size-5" />
+                </div>
+                <h3 className="mt-5 text-base font-semibold tracking-tight">
+                  {s.title}
+                </h3>
+                <p className="mt-2 text-sm leading-6 text-muted-foreground">
+                  {s.desc}
+                </p>
+              </div>
+            </MinimalCard>
           ))}
         </div>
       </section>
@@ -303,89 +305,118 @@ export default function Home() {
       {/* 工作经历 */}
       <section
         id="experience"
-        className="container scroll-mt-20 py-24 border-t border-border/60"
+        className="container scroll-mt-20 py-24 sm:py-28 border-t border-border/50"
       >
         <p className="section-label">Experience</p>
-        <h2 className="section-title">工作经历</h2>
-        <div className="mt-12 space-y-10">
+        <GradientHeading asChild variant="brand" size="lg" weight="semi">
+          <h2>工作经历</h2>
+        </GradientHeading>
+        <div className="mt-12 space-y-2">
           {jobs.map((job) => (
-            <div key={job.company} className="relative border-l border-border pl-8">
-              <span className="absolute -left-[5px] top-1.5 h-2.5 w-2.5 rounded-full bg-primary" />
+            <div
+              key={job.company}
+              className="group relative border-l border-border/70 pl-8 pb-10 last:pb-0"
+            >
+              <span className="absolute -left-[6px] top-1.5 size-3 rounded-full bg-primary ring-4 ring-primary/15 transition-shadow group-hover:ring-primary/25" />
               <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
-                <h3 className="text-lg font-semibold">{job.role}</h3>
+                <h3 className="text-lg font-semibold tracking-tight">
+                  {job.role}
+                </h3>
                 <span className="text-sm font-medium text-foreground/80">
                   {job.company}
                 </span>
-                <span className="ml-auto text-sm text-muted-foreground">
+                <span className="ml-auto font-mono text-xs text-muted-foreground">
                   {job.period}
                 </span>
               </div>
-              <ul className="mt-3 list-disc space-y-2 pl-5 text-sm leading-6 text-muted-foreground">
+              <ul className="mt-3 space-y-2">
                 {job.points.map((point) => (
-                  <li key={point}>{point}</li>
+                  <li
+                    key={point}
+                    className="relative pl-5 text-sm leading-6 text-muted-foreground before:absolute before:left-0 before:top-[9px] before:size-1 before:rounded-full before:bg-border before:content-['']"
+                  >
+                    {point}
+                  </li>
                 ))}
               </ul>
             </div>
           ))}
         </div>
 
-        <h3 className="mt-16 text-lg font-semibold">教育背景</h3>
+        <h3 className="mt-16 text-lg font-semibold tracking-tight">教育背景</h3>
         <div className="mt-6 space-y-4">
           {education.map((ed) => (
             <div
               key={ed.degree}
-              className="flex flex-wrap items-baseline gap-x-3 gap-y-1 rounded-xl border border-border bg-card px-5 py-4"
+              className="rounded-2xl border border-border/60 bg-card/60 px-5 py-4 backdrop-blur-sm shadow-sm"
             >
-              <span className="font-medium">{ed.degree}</span>
-              <span className="text-sm text-muted-foreground">{ed.school}</span>
-              <span className="ml-auto text-sm text-muted-foreground">
-                {ed.period}
-              </span>
+              <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
+                <span className="font-medium">{ed.degree}</span>
+                <span className="text-sm text-muted-foreground">
+                  {ed.school}
+                </span>
+                <span className="ml-auto font-mono text-xs text-muted-foreground">
+                  {ed.period}
+                </span>
+              </div>
             </div>
           ))}
         </div>
       </section>
 
-      {/* 项目作品 */}
+      {/* 重点项目（与工作经历一一对应） */}
       <section
         id="projects"
-        className="container scroll-mt-20 py-24 border-t border-border/60"
+        className="container scroll-mt-20 py-24 sm:py-28 border-t border-border/50"
       >
         <p className="section-label">Projects</p>
-        <h2 className="section-title">自研项目</h2>
-        <p className="mt-6 max-w-3xl text-lg leading-8 text-muted-foreground">
-          用前端能力把产品想法做成可交互原型，验证交互设计与 AI
-          体验。悬停卡片查看更多。
+        <GradientHeading asChild variant="brand" size="lg" weight="semi">
+          <h2>重点项目</h2>
+        </GradientHeading>
+        <p className="mt-6 max-w-3xl text-[15px] leading-7 text-muted-foreground">
+          主导与参与过的核心产品，从 0 到 1 落地。悬停卡片查看更多。
         </p>
         <div className="mt-12 grid justify-items-center gap-8 sm:grid-cols-2 lg:grid-cols-4">
-          {projects.map((p) => (
+          {projects.map((p, i) => (
             <ShiftCard
               key={p.name}
+              className="bg-gradient-to-b from-card to-muted/40"
               topContent={
-                <div className="w-full rounded-lg bg-accent/80 px-3 py-2">
-                  <p className="text-sm font-semibold text-accent-foreground">
+                <div className="w-full rounded-lg bg-gradient-to-r from-brand-1 to-brand-2 px-3 py-2 text-primary-foreground shadow-sm">
+                  <p className="text-sm font-semibold">
+                    <span className="mr-2 font-mono text-xs opacity-80">
+                      0{i + 1}
+                    </span>
                     {p.name}
                   </p>
                 </div>
               }
               middleContent={
                 <div className="flex flex-col items-center gap-3 text-center">
-                  <p.icon className="size-10 text-primary" />
+                  <div className="flex size-12 items-center justify-center rounded-xl bg-brand-soft text-primary ring-1 ring-inset ring-primary/10">
+                    <p.icon className="size-6" />
+                  </div>
                   <p className="max-w-[220px] text-sm leading-5 text-muted-foreground">
                     {p.desc}
                   </p>
                 </div>
               }
               bottomContent={
-                <div className="flex w-full flex-col gap-3 rounded-xl border border-border bg-card px-4 py-4 shadow-elevation-light dark:shadow-elevation-dark">
+                <div className="flex w-full flex-col gap-3 rounded-xl border border-border/60 bg-card/80 px-4 py-4 backdrop-blur-sm shadow-sm">
                   <div className="flex flex-wrap gap-1.5">
                     {p.tags.map((tag) => (
-                      <Badge key={tag} variant="secondary" className="text-[11px]">
+                      <Badge
+                        key={tag}
+                        variant="secondary"
+                        className="text-[11px] font-normal"
+                      >
                         {tag}
                       </Badge>
                     ))}
                   </div>
-                  <p className="text-xs text-muted-foreground">{p.highlight}</p>
+                  <p className="font-mono text-xs text-muted-foreground">
+                    {p.highlight}
+                  </p>
                 </div>
               }
             />
@@ -396,19 +427,25 @@ export default function Home() {
       {/* 技能 */}
       <section
         id="skills"
-        className="container scroll-mt-20 py-24 border-t border-border/60"
+        className="container scroll-mt-20 py-24 sm:py-28 border-t border-border/50"
       >
         <p className="section-label">Skills</p>
-        <h2 className="section-title">技能</h2>
+        <GradientHeading asChild variant="brand" size="lg" weight="semi">
+          <h2>技能</h2>
+        </GradientHeading>
         <div className="mt-12 grid gap-10 md:grid-cols-3">
           {skills.map((group) => (
             <div key={group.group}>
-              <h3 className="text-sm font-semibold uppercase tracking-wider text-muted-foreground">
+              <h3 className="text-xs font-semibold uppercase tracking-[0.18em] text-muted-foreground">
                 {group.group}
               </h3>
               <div className="mt-4 flex flex-wrap gap-2">
                 {group.items.map((item) => (
-                  <Badge key={item} variant="outline">
+                  <Badge
+                    key={item}
+                    variant="outline"
+                    className="rounded-full border-border/60 bg-card px-3 py-1.5 text-[13px] text-foreground/80 shadow-sm transition-colors hover:border-primary/40 hover:text-primary"
+                  >
                     {item}
                   </Badge>
                 ))}
