@@ -3,6 +3,7 @@ import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
 
 import { PrintButton } from "@/components/print-button";
+import { TextureOverlay } from "@/components/cult/texture-overlay";
 import {
   EMAIL,
   education,
@@ -18,9 +19,23 @@ export const metadata: Metadata = {
 
 export default function ResumePage() {
   return (
-    <main className="min-h-screen print:bg-white">
+    <main className="relative min-h-screen print:bg-white">
+      {/* 品牌氛围（屏幕显示，打印隐藏） */}
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-0 overflow-hidden print:hidden"
+      >
+        <div className="absolute left-[-10%] top-[-8%] h-[45vh] w-[45vw] rounded-full bg-brand-glow-orange mix-blend-screen blur-[120px]" />
+        <div className="absolute bottom-[-10%] right-[-10%] h-[40vh] w-[40vw] rounded-full bg-brand-glow-mint mix-blend-screen blur-[120px]" />
+      </div>
+      <TextureOverlay
+        texture="noise"
+        opacity={0.15}
+        className="pointer-events-none absolute inset-0 mix-blend-screen print:hidden"
+      />
+
       {/* 工具条（打印时隐藏） */}
-      <div className="border-b border-border/60 bg-background/80 backdrop-blur-xl print:hidden">
+      <div className="relative border-b border-border/60 bg-background/80 backdrop-blur-xl print:hidden">
         <div className="container flex h-14 items-center justify-between">
           <Link
             href="/"
@@ -33,7 +48,7 @@ export default function ResumePage() {
       </div>
 
       {/* 简历正文 */}
-      <div className="container max-w-3xl py-12 print:max-w-none print:py-0">
+      <div className="container relative max-w-3xl py-12 print:max-w-none print:py-0">
         {/* 头部 */}
         <header className="mb-10 print:mb-6">
           <h1 className="text-4xl font-semibold tracking-tight">连晟</h1>
@@ -43,6 +58,7 @@ export default function ResumePage() {
           <p className="mt-1 font-mono text-xs text-muted-foreground">
             4 年工作经历 · {EMAIL}
           </p>
+          <div className="mt-4 h-px w-16 bg-gradient-brand print:hidden" />
         </header>
 
         {/* 核心优势 */}
