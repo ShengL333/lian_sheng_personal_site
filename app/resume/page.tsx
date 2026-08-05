@@ -70,9 +70,9 @@ export default function ResumePage() {
             {strengths.map((s) => (
               <li
                 key={s.title}
-                className="flex gap-3 text-sm leading-6 text-foreground/90"
+                className="group flex gap-3 text-sm leading-6 text-foreground/90"
               >
-                <span className="mt-2 size-1 shrink-0 rounded-full bg-primary" />
+                <span className="mt-2 size-1 shrink-0 rounded-full bg-primary transition-shadow group-hover:shadow-[0_0_10px_var(--brand-1)]" />
                 <span>
                   <span className="font-medium">{s.title}</span>
                   <span className="text-muted-foreground"> — {s.desc}</span>
@@ -126,15 +126,17 @@ export default function ResumePage() {
             {education.map((ed) => (
               <div
                 key={ed.degree}
-                className="flex flex-wrap items-baseline gap-x-3 gap-y-1"
+                className="rounded-2xl border border-border/60 bg-card/60 px-5 py-4 backdrop-blur-sm transition-all hover:border-brand-1/40 hover:shadow-[0_16px_50px_-20px_var(--brand-glow-orange)] print:shadow-none print:hover:border-border/60"
               >
-                <span className="font-medium">{ed.degree}</span>
-                <span className="text-sm text-muted-foreground">
-                  {ed.school}
-                </span>
-                <span className="ml-auto font-mono text-xs text-muted-foreground">
-                  {ed.period}
-                </span>
+                <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
+                  <span className="font-medium">{ed.degree}</span>
+                  <span className="text-sm text-muted-foreground">
+                    {ed.school}
+                  </span>
+                  <span className="ml-auto font-mono text-xs text-muted-foreground">
+                    {ed.period}
+                  </span>
+                </div>
               </div>
             ))}
           </div>

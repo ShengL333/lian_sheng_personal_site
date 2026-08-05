@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { ArrowLeft } from "lucide-react";
+import { ArrowLeft, ArrowUpRight } from "lucide-react";
 
 import { GradientHeading } from "@/components/cult/gradient-heading";
 import { TextureOverlay } from "@/components/cult/texture-overlay";
@@ -46,34 +46,37 @@ export default function BlogPage() {
           关于 AI 产品、Agent 系统、RAG 与产品思考的随手记录。
         </p>
 
-        <div className="mt-12 space-y-2">
+        <div className="mt-12 space-y-3">
           {posts.map((post) => (
             <Link
               key={post.slug}
               href={`/blog/${post.slug}`}
-              className="group block rounded-2xl border border-border/60 bg-card/60 px-6 py-5 shadow-sm transition-all hover:border-brand-1/40 hover:bg-card hover:shadow-md"
+              className="group relative block rounded-2xl bg-gradient-to-br from-brand-1/40 via-brand-amber/20 to-brand-2-vivid/30 p-px transition-all hover:shadow-[0_16px_50px_-20px_var(--brand-glow-orange)]"
             >
-              <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
-                <h2 className="text-lg font-semibold tracking-tight transition-colors group-hover:text-primary">
-                  {post.title}
-                </h2>
-                <span className="ml-auto font-mono text-xs text-muted-foreground">
-                  {post.date}
-                </span>
-              </div>
-              <p className="mt-2 text-sm leading-6 text-muted-foreground">
-                {post.excerpt}
-              </p>
-              <div className="mt-3 flex flex-wrap gap-1.5">
-                {post.tags.map((tag) => (
-                  <Badge
-                    key={tag}
-                    variant="secondary"
-                    className="text-[11px] font-normal"
-                  >
-                    {tag}
-                  </Badge>
-                ))}
+              <div className="flex h-full flex-col gap-2 rounded-[calc(1rem-1px)] bg-card/70 px-6 py-5 backdrop-blur-md transition-colors hover:bg-card">
+                <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
+                  <h2 className="flex items-center gap-1.5 text-lg font-semibold tracking-tight">
+                    {post.title}
+                    <ArrowUpRight className="size-4 text-muted-foreground transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
+                  </h2>
+                  <span className="ml-auto font-mono text-xs text-muted-foreground">
+                    {post.date}
+                  </span>
+                </div>
+                <p className="text-sm leading-6 text-muted-foreground">
+                  {post.excerpt}
+                </p>
+                <div className="mt-1 flex flex-wrap gap-1.5">
+                  {post.tags.map((tag) => (
+                    <Badge
+                      key={tag}
+                      variant="secondary"
+                      className="text-[11px] font-normal"
+                    >
+                      {tag}
+                    </Badge>
+                  ))}
+                </div>
               </div>
             </Link>
           ))}
