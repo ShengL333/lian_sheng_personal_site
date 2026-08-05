@@ -4,84 +4,119 @@
 
 @custom-variant dark (&:is(.dark *));
 
-/* --- Theme tokens (OKLCH) --- */
+/* ==========================================================================
+   深色优先：:root 即深色（无 FOUC），.light 为浅色逃生舱。
+   品牌：朱橙 #FF5300 × 薄荷 #A7E6D5，渐变贯穿。
+   ========================================================================== */
 :root {
-	/* 暖纸白浅色 — 编辑式高级感 */
-	--background: oklch(0.985 0.005 85);
-	--foreground: oklch(0.205 0.02 85);
+	/* 分层背景 — 夜空冷蓝墨，L>0.14，非死黑 */
+	--background-deep: oklch(0.145 0.015 255);
+	--background: oklch(0.17 0.018 255);
+	--card: oklch(0.2 0.02 258);
+	--card-raised: oklch(0.235 0.025 258);
 
-	--card: oklch(0.99 0.004 85);
-	--card-foreground: oklch(0.205 0.02 85);
+	--foreground: oklch(0.95 0.008 260);
+	--card-foreground: var(--foreground);
+	--popover: oklch(0.215 0.022 258);
+	--popover-foreground: var(--foreground);
 
-	--popover: oklch(0.99 0.004 85);
-	--popover-foreground: oklch(0.205 0.02 85);
+	/* 主色：朱橙。墨字前景（橙底高对比） */
+	--primary: oklch(0.68 0.21 38);
+	--primary-foreground: oklch(0.15 0.02 260);
 
-	--primary: oklch(0.52 0.19 262);
-	--primary-foreground: oklch(0.985 0 0);
+	--secondary: oklch(0.25 0.035 178);
+	--secondary-foreground: oklch(0.88 0.06 176);
 
-	--secondary: oklch(0.95 0.01 85);
-	--secondary-foreground: oklch(0.3 0.03 262);
+	--muted: oklch(0.23 0.02 260);
+	--muted-foreground: oklch(0.71 0.02 260);
 
-	--muted: oklch(0.955 0.008 85);
-	--muted-foreground: oklch(0.46 0.015 85);
+	--accent: oklch(0.27 0.05 178);
+	--accent-foreground: oklch(0.9 0.06 176);
 
-	--accent: oklch(0.955 0.012 85);
-	--accent-foreground: oklch(0.3 0.03 262);
-
-	--destructive: oklch(0.577 0.245 27.325);
+	--destructive: oklch(0.704 0.191 22.216);
 	--destructive-foreground: oklch(0.985 0 0);
 
-	--border: oklch(0.9 0.01 85);
-	--input: oklch(0.9 0.01 85);
-	--ring: oklch(0.55 0.16 262);
+	--border: oklch(1 0 0 / 10%);
+	--input: oklch(1 0 0 / 14%);
+	--ring: oklch(0.75 0.2 45);
 
-	--radius: 0.75rem;
+	--radius: 0.9rem;
 
-	/* 品牌色：靛蓝 → 紫罗兰 */
-	--brand-1: oklch(0.52 0.19 262);
-	--brand-2: oklch(0.6 0.2 292);
-	--brand-soft: oklch(0.965 0.02 262);
+	/* 品牌：朱橙 → 琥珀 → 薄荷 → 青 */
+	--brand-1: oklch(0.68 0.21 38);
+	--brand-1-bright: oklch(0.75 0.2 42);
+	--brand-amber: oklch(0.8 0.15 72);
+	--brand-2: oklch(0.88 0.07 176);
+	--brand-2-vivid: oklch(0.84 0.12 178);
+	--brand-3: oklch(0.79 0.1 195);
+	--brand-soft: oklch(0.28 0.07 38);
+	--brand-soft-2: oklch(0.27 0.06 178);
+	--brand-glow-orange: oklch(0.68 0.21 38 / 0.28);
+	--brand-glow-mint: oklch(0.84 0.12 178 / 0.18);
+
+	/* 渐变 token（全站复用） */
+	--grad-brand: linear-gradient(
+		120deg,
+		var(--brand-1) 0%,
+		var(--brand-amber) 45%,
+		var(--brand-2-vivid) 100%
+	);
+	--grad-brand-text: linear-gradient(
+		110deg,
+		var(--brand-1-bright) 0%,
+		var(--brand-amber) 45%,
+		var(--brand-2-vivid) 100%
+	);
 
 	--text-dimmed: var(--muted-foreground);
 	--text-highlighted: var(--foreground);
 }
 
-.dark {
-	/* 夜空墨蓝 — 有深度，不是死黑 */
-	--background: oklch(0.17 0.02 262);
-	--foreground: oklch(0.94 0.008 262);
-
-	--card: oklch(0.2 0.025 262);
-	--card-foreground: oklch(0.94 0.008 262);
-
-	--popover: oklch(0.2 0.025 262);
-	--popover-foreground: oklch(0.94 0.008 262);
-
-	--primary: oklch(0.7 0.15 262);
-	--primary-foreground: oklch(0.17 0.02 262);
-
-	--secondary: oklch(0.25 0.03 262);
-	--secondary-foreground: oklch(0.92 0.01 262);
-
-	--muted: oklch(0.24 0.03 262);
-	--muted-foreground: oklch(0.72 0.02 262);
-
-	--accent: oklch(0.26 0.04 262);
-	--accent-foreground: oklch(0.92 0.01 262);
-
-	--destructive: oklch(0.704 0.191 22.216);
+/* 浅色逃生舱（默认不启用，ThemeToggle 切到 light 时生效） */
+.light {
+	--background-deep: oklch(0.985 0.005 85);
+	--background: oklch(0.985 0.005 85);
+	--card: oklch(0.99 0.004 85);
+	--card-raised: oklch(1 0 0);
+	--card-foreground: oklch(0.205 0.02 85);
+	--popover: oklch(0.99 0.004 85);
+	--popover-foreground: oklch(0.205 0.02 85);
+	--foreground: oklch(0.205 0.02 85);
+	--primary: oklch(0.55 0.18 40);
+	--primary-foreground: oklch(0.985 0 0);
+	--secondary: oklch(0.95 0.02 178);
+	--secondary-foreground: oklch(0.3 0.05 176);
+	--muted: oklch(0.955 0.008 85);
+	--muted-foreground: oklch(0.46 0.015 85);
+	--accent: oklch(0.955 0.02 178);
+	--accent-foreground: oklch(0.3 0.05 176);
+	--destructive: oklch(0.577 0.245 27.325);
 	--destructive-foreground: oklch(0.985 0 0);
-
-	--border: oklch(1 0 0 / 12%);
-	--input: oklch(1 0 0 / 16%);
-	--ring: oklch(0.75 0.15 262);
-
-	--brand-1: oklch(0.7 0.16 262);
-	--brand-2: oklch(0.75 0.17 292);
-	--brand-soft: oklch(0.28 0.05 262);
-
-	--text-dimmed: var(--muted-foreground);
-	--text-highlighted: var(--foreground);
+	--border: oklch(0.9 0.01 85);
+	--input: oklch(0.9 0.01 85);
+	--ring: oklch(0.55 0.16 40);
+	--brand-1: oklch(0.55 0.18 40);
+	--brand-1-bright: oklch(0.62 0.19 45);
+	--brand-amber: oklch(0.72 0.13 75);
+	--brand-2: oklch(0.72 0.1 178);
+	--brand-2-vivid: oklch(0.68 0.12 180);
+	--brand-3: oklch(0.68 0.11 195);
+	--brand-soft: oklch(0.965 0.02 40);
+	--brand-soft-2: oklch(0.96 0.02 178);
+	--brand-glow-orange: oklch(0.55 0.18 40 / 0.16);
+	--brand-glow-mint: oklch(0.68 0.12 180 / 0.14);
+	--grad-brand: linear-gradient(
+		120deg,
+		var(--brand-1) 0%,
+		var(--brand-amber) 45%,
+		var(--brand-2-vivid) 100%
+	);
+	--grad-brand-text: linear-gradient(
+		110deg,
+		var(--brand-1) 0%,
+		var(--brand-amber) 45%,
+		var(--brand-2-vivid) 100%
+	);
 }
 
 /* --- Tailwind theme mapping (v4) --- */
@@ -93,60 +128,60 @@
 		ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono",
 		monospace;
 
+	--color-background-deep: var(--background-deep);
 	--color-background: var(--background);
+	--color-card: var(--card);
+	--color-card-raised: var(--card-raised);
+	--color-card-foreground: var(--card-foreground);
+	--color-popover: var(--popover);
+	--color-popover-foreground: var(--popover-foreground);
 	--color-foreground: var(--foreground);
 	--color-dimmed: var(--text-dimmed);
 	--color-highlighted: var(--text-highlighted);
 
-	--color-card: var(--card);
-	--color-card-foreground: var(--card-foreground);
-
-	--color-popover: var(--popover);
-	--color-popover-foreground: var(--popover-foreground);
-
 	--color-primary: var(--primary);
 	--color-primary-foreground: var(--primary-foreground);
-
 	--color-secondary: var(--secondary);
 	--color-secondary-foreground: var(--secondary-foreground);
-
 	--color-muted: var(--muted);
 	--color-muted-foreground: var(--muted-foreground);
-
 	--color-accent: var(--accent);
 	--color-accent-foreground: var(--accent-foreground);
-
 	--color-destructive: var(--destructive);
 	--color-destructive-foreground: var(--destructive-foreground);
-
 	--color-border: var(--border);
 	--color-input: var(--input);
 	--color-ring: var(--ring);
 
 	--color-brand-1: var(--brand-1);
+	--color-brand-1-bright: var(--brand-1-bright);
+	--color-brand-amber: var(--brand-amber);
 	--color-brand-2: var(--brand-2);
+	--color-brand-2-vivid: var(--brand-2-vivid);
+	--color-brand-3: var(--brand-3);
 	--color-brand-soft: var(--brand-soft);
+	--color-brand-soft-2: var(--brand-soft-2);
+	--color-brand-glow-orange: var(--brand-glow-orange);
+	--color-brand-glow-mint: var(--brand-glow-mint);
 
-	/* Radii */
 	--radius-sm: calc(var(--radius) - 4px);
 	--radius-md: calc(var(--radius) - 2px);
 	--radius-lg: var(--radius);
 	--radius-xl: calc(var(--radius) + 4px);
+}
 
-	/* Shadows */
-	--shadow-glow: 0 0 4px oklch(0 0 0 / 0.1);
-	--shadow-elevation-light:
-		0px 1px 1px 0px oklch(0 0 0 / 0.05),
-		0px 1px 1px 0px oklch(0.98 0.01 60 / 0.5) inset,
-		0px 0px 0px 1px oklch(1 0 0 / 0.1) inset,
-		0px 0px 1px 0px oklch(0.2 0.01 60 / 0.5);
-	--shadow-elevation-dark:
-		0px 10px 20px oklch(0 0 0 / 0.6), 0px 6px 12px oklch(0 0 0 / 0.5),
-		0px 3px 6px oklch(0 0 0 / 0.4), 0px 1px 3px oklch(0 0 0 / 0.3),
-		0px 1px 2px oklch(1 0 0 / 0.06) inset,
-		0px 0px 0px 1px oklch(1 0 0 / 0.04) inset,
-		0px -2px 6px oklch(0 0 0 / 0.25) inset, 0px 1px 1px oklch(1 0 0 / 0.02),
-		1px 1px 2px oklch(1 0 0 / 0.01);
+/* 品牌渐变 utility */
+@utility bg-gradient-brand {
+	background-image: var(--grad-brand);
+}
+@utility bg-gradient-brand-text {
+	background-image: var(--grad-brand-text);
+}
+@utility text-gradient-brand {
+	background-image: var(--grad-brand-text);
+	background-clip: text;
+	-webkit-background-clip: text;
+	color: transparent;
 }
 
 /* Base resets */
@@ -182,14 +217,20 @@
 	margin-right: 0.5rem;
 	box-shadow: 0 0 8px var(--primary);
 }
-.section-title {
-	@apply text-4xl md:text-5xl tracking-tight text-highlighted;
-}
 
 @media (max-width: 640px) {
 	.container {
 		@apply px-4;
 	}
+}
+
+/* 隐藏横向滚动条（项目轮播用） */
+.scrollbar-hide {
+	-ms-overflow-style: none;
+	scrollbar-width: none;
+}
+.scrollbar-hide::-webkit-scrollbar {
+	display: none;
 }
 
 /* 打印：简历页另存为 PDF 时保留品牌色、白底 */

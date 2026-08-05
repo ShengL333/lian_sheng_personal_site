@@ -30,19 +30,19 @@ export default async function BlogPostPage({ params }: PageProps) {
 
   if (!post) {
     return (
-      <main className="min-h-screen">
+      <div>
         <div className="container max-w-3xl pt-28 pb-24">
           <p className="text-muted-foreground">文章不存在。</p>
           <Link href="/blog" className="mt-4 inline-block text-sm underline">
             返回博客
           </Link>
         </div>
-      </main>
+      </div>
     );
   }
 
   return (
-    <main className="min-h-screen">
+    <div>
       <div className="container max-w-3xl pt-28 pb-24">
         <Link
           href="/blog"
@@ -70,11 +70,11 @@ export default async function BlogPostPage({ params }: PageProps) {
         </div>
 
         <div className="mt-10">
-          <article className="prose prose-neutral max-w-none dark:prose-invert prose-headings:tracking-tight prose-a:text-primary">
+          <article className="prose prose-neutral max-w-none dark:prose-invert prose-headings:tracking-[-0.02em] prose-a:text-primary">
             <Markdown remarkPlugins={[remarkGfm]}>{post.content}</Markdown>
           </article>
         </div>
       </div>
-    </main>
+    </div>
   );
 }

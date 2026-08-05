@@ -15,7 +15,7 @@ export default function BlogPage() {
   const posts = getPosts();
 
   return (
-    <main className="min-h-screen">
+    <div>
       <div className="container max-w-3xl pt-28 pb-24">
         <Link
           href="/"
@@ -65,6 +65,6 @@ export default function BlogPage() {
           ))}
         </div>
       </div>
-    </main>
+    </div>
   );
 }
