@@ -39,3 +39,6 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# 原始大图（压缩版在 public/pics/portrait.jpg）
+/pics/

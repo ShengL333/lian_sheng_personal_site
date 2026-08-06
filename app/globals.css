@@ -232,12 +232,3 @@
 .scrollbar-hide::-webkit-scrollbar {
 	display: none;
 }
-
-/* 打印：简历页另存为 PDF 时保留品牌色、白底 */
-@media print {
-	body {
-		background: oklch(1 0 0);
-		-webkit-print-color-adjust: exact;
-		print-color-adjust: exact;
-	}
-}

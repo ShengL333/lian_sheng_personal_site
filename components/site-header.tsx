@@ -11,10 +11,9 @@ import { ThemeToggle } from "@/components/theme-toggle";
 
 const navItems = [
   { href: "/", label: "首页" },
-  { href: "/about", label: "关于" },
+  { href: "/about", label: "关于我" },
   { href: "/work", label: "项目" },
   { href: "/blog", label: "博客" },
-  { href: "/resume", label: "简历" },
   { href: "/contact", label: "联系" },
 ];
 

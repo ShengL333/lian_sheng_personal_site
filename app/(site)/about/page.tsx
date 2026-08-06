@@ -1,8 +1,10 @@
+import Image from "next/image";
 import { GradientHeading } from "@/components/cult/gradient-heading";
 import { MinimalCard } from "@/components/cult/minimal-card";
 import { TextureOverlay } from "@/components/cult/texture-overlay";
 import { Badge } from "@/components/ui/badge";
-import { skills, strengths } from "@/lib/site-data";
+import { EMAIL, skills, strengths } from "@/lib/site-data";
+import portrait from "@/public/pics/portrait.jpg";
 
 export default function AboutPage() {
   return (
@@ -27,27 +29,44 @@ export default function AboutPage() {
           <h1>关于我</h1>
         </GradientHeading>
 
-        <div className="mt-8 max-w-3xl space-y-6 text-[15px] leading-8 text-muted-foreground md:text-base">
-          <p>
-            我学游戏设计与开发出身，在海外做过几年游戏产品，回国后一路做到 AI
-            产品经理。从游戏到 AI，驱动我的是同一个问题：{" "}
-            <span className="font-medium text-foreground">
-              怎么让人对一个系统产生情感，并愿意长期投入。
-            </span>
-          </p>
-          <blockquote className="border-l-2 border-primary/60 pl-4 text-lg font-medium leading-relaxed text-foreground/90">
-            「AI 产品不是把模型包装好，而是让技术长出有人情味的样子。」
-          </blockquote>
-          <p>
-            游戏用玩法、养成和即时反馈；AI 产品用对话、角色和关系成长。我做的角色陪伴产品、数字人、
-            互动叙事，本质上都在设计「用户愿意回来的体验」。而 AI
-            的价值最终要落进真实流程——所以我也在制造业做智能排程、在政企场景做数字人交付，把大模型能力变成能算账、能交付的产品。
-          </p>
-          <p>
-            工作之外，我维护一个由 LLM 构建的个人知识库，系统学习 Agent、RAG
-            和多智能体系统。对我而言，AI 正在重写「人机协作」的方式，而产品经理的职责，
-            是让新技术长出有人情味的样子。
-          </p>
+        {/* 照片 + 叙事 */}
+        <div className="mt-10 grid items-start gap-8 md:grid-cols-[280px_1fr] lg:grid-cols-[320px_1fr]">
+          <div className="group relative w-full max-w-[320px] rounded-3xl bg-gradient-to-br from-brand-1/40 via-brand-amber/20 to-brand-2-vivid/30 p-px transition-shadow hover:shadow-[0_24px_70px_-24px_var(--brand-glow-orange)]">
+            <Image
+              src={portrait}
+              alt="连晟"
+              priority
+              className="aspect-[2/3] w-full rounded-[calc(1.5rem-1px)] object-cover"
+            />
+          </div>
+          <div className="max-w-2xl space-y-5 text-[15px] leading-8 text-muted-foreground md:text-base">
+            <p className="text-base font-medium text-foreground">
+              AI 产品经理 · 厦门 · 4 年经历
+            </p>
+            <p>
+              我学游戏设计与开发出身，在海外做过几年游戏产品，回国后一路做到 AI
+              产品经理。从游戏到 AI，驱动我的是同一个问题：{" "}
+              <span className="font-medium text-foreground">
+                怎么让人对一个系统产生情感，并愿意长期投入。
+              </span>
+            </p>
+            <blockquote className="border-l-2 border-primary/60 pl-4 text-lg font-medium leading-relaxed text-foreground/90">
+              「AI 产品不是把模型包装好，而是让技术长出有人情味的样子。」
+            </blockquote>
+            <p>
+              游戏用玩法、养成和即时反馈；AI 产品用对话、角色和关系成长。我做的角色陪伴产品、数字人、
+              互动叙事，本质上都在设计「用户愿意回来的体验」。而 AI
+              的价值最终要落进真实流程——所以我也在制造业做智能排程、在政企场景做数字人交付，把大模型能力变成能算账、能交付的产品。
+            </p>
+            <p>
+              工作之外，我维护一个由 LLM 构建的个人知识库，系统学习 Agent、RAG
+              和多智能体系统。对我而言，AI 正在重写「人机协作」的方式，而产品经理的职责，
+              是让新技术长出有人情味的样子。
+            </p>
+            <p className="font-mono text-sm text-foreground/80">
+              {EMAIL}
+            </p>
+          </div>
         </div>
 
         <div className="mt-14">

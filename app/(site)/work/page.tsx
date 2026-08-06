@@ -9,6 +9,14 @@ const stats = [
   { value: "02", label: "次 0→1 主导" },
 ];
 
+const METHOD = [
+  { title: "洞察", note: "听懂真实问题与场景" },
+  { title: "定义", note: "拆解为可验证的假设" },
+  { title: "假设", note: "最小方案先跑通闭环" },
+  { title: "验证", note: "数据与用户反馈校验" },
+  { title: "迭代", note: "成立再放大，不成立换方向" },
+];
+
 const statuses = ["进行中", "已上线", "已上线", "已上线"];
 
 export default function WorkPage() {
@@ -37,6 +45,33 @@ export default function WorkPage() {
         <p className="mt-6 max-w-3xl text-[15px] leading-7 text-muted-foreground md:text-base">
           主导与参与过的核心产品，从 0 到 1 落地。左右滑动浏览。
         </p>
+
+        {/* 产品方法论流程带 */}
+        <div className="mt-12">
+          <p className="text-xs font-semibold uppercase tracking-[0.18em] text-muted-foreground">
+            我的产品方法
+          </p>
+          <div className="mt-5 flex items-start gap-3 sm:gap-4">
+            {METHOD.map((step, i) => (
+              <div key={step.title} className="flex flex-1 items-start gap-3 sm:gap-4">
+                <div className="flex flex-col items-center">
+                  <span className="flex size-9 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-brand-1 to-brand-2-vivid font-mono text-xs font-semibold text-primary-foreground shadow-[0_0_16px_-6px_var(--brand-glow-orange)]">
+                    {i + 1}
+                  </span>
+                  {i < METHOD.length - 1 && (
+                    <span className="mt-1.5 w-px flex-1 bg-gradient-to-b from-brand-1/60 to-brand-2-vivid/40" />
+                  )}
+                </div>
+                <div className="pb-1">
+                  <p className="text-sm font-semibold tracking-tight">{step.title}</p>
+                  <p className="mt-1 text-xs leading-5 text-muted-foreground">
+                    {step.note}
+                  </p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
 
         <div className="mt-10">
           <ProjectCarousel
