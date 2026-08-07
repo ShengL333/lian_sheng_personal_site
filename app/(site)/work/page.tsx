@@ -1,20 +1,12 @@
 import { GradientHeading } from "@/components/cult/gradient-heading";
 import { TextureOverlay } from "@/components/cult/texture-overlay";
 import { ProjectCarousel } from "@/components/project-carousel";
-import { education, jobs, projects } from "@/lib/site-data";
+import { education, jobs, METHOD, projects } from "@/lib/site-data";
 
 const stats = [
   { value: "04", label: "代表项目" },
   { value: "03", label: "AI 领域" },
   { value: "02", label: "次 0→1 主导" },
-];
-
-const METHOD = [
-  { title: "洞察", note: "听懂真实问题与场景" },
-  { title: "定义", note: "拆解为可验证的假设" },
-  { title: "假设", note: "最小方案先跑通闭环" },
-  { title: "验证", note: "数据与用户反馈校验" },
-  { title: "迭代", note: "成立再放大，不成立换方向" },
 ];
 
 const statuses = ["进行中", "已上线", "已上线", "已上线"];

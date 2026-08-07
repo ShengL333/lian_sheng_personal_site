@@ -12,6 +12,14 @@ import {
 
 export const EMAIL = "lian.lukes@gmail.com";
 
+export const METHOD: { title: string; note: string }[] = [
+  { title: "洞察", note: "听懂真实问题与场景" },
+  { title: "定义", note: "拆解为可验证的假设" },
+  { title: "假设", note: "最小方案先跑通闭环" },
+  { title: "验证", note: "数据与用户反馈校验" },
+  { title: "迭代", note: "成立再放大，不成立换方向" },
+];
+
 export const strengths: { icon: LucideIcon; title: string; desc: string }[] = [
   {
     icon: Rocket,

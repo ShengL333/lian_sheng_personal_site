@@ -1,18 +1,57 @@
+import { Fragment } from "react";
 import { FileText, FolderKanban, Mail, User } from "lucide-react";
 
+import { GradientAnimation } from "@/components/cult/bg-animated-gradient";
 import { GridBeam } from "@/components/cult/grid-beam";
 import { TextureOverlay } from "@/components/cult/texture-overlay";
 import { TextAnimate } from "@/components/cult/text-animate";
 import { HubCard } from "@/components/hub-card";
+import { METHOD } from "@/lib/site-data";
 
 export default function Home() {
   return (
     <section className="relative flex min-h-[100svh] flex-col justify-center overflow-hidden pt-20">
-      {/* 层 1：深底 + 双层品牌光晕 */}
-      <div aria-hidden className="pointer-events-none absolute inset-0 bg-background-deep">
-        <div className="absolute left-1/2 top-[-20%] h-[55vh] w-[80vw] -translate-x-1/2 rounded-full bg-brand-glow-orange mix-blend-screen blur-[120px]" />
-        <div className="absolute bottom-[-15%] right-[-5%] h-[45vh] w-[50vw] rounded-full bg-brand-glow-mint mix-blend-screen blur-[120px]" />
-      </div>
+      {/* 层 1：深底 */}
+      <div aria-hidden className="pointer-events-none absolute inset-0 bg-background-deep" />
+      {/* 层 1b：橙⇄薄荷 缓慢漂移（motion 关键帧 morph，rgba 才能平滑插值） */}
+      <GradientAnimation
+        className="pointer-events-none opacity-70 mix-blend-screen"
+        animationDuration={10}
+        gradients={[
+          {
+            stops: [
+              { color: "rgba(255,83,0,0.30)", position: 0 },
+              { color: "rgba(255,83,0,0)", position: 55 },
+            ],
+            centerX: 18,
+            centerY: 15,
+          },
+          {
+            stops: [
+              { color: "rgba(167,230,213,0.22)", position: 0 },
+              { color: "rgba(167,230,213,0)", position: 60 },
+            ],
+            centerX: 82,
+            centerY: 80,
+          },
+          {
+            stops: [
+              { color: "rgba(255,83,0,0.22)", position: 0 },
+              { color: "rgba(255,83,0,0)", position: 58 },
+            ],
+            centerX: 78,
+            centerY: 20,
+          },
+          {
+            stops: [
+              { color: "rgba(167,230,213,0.26)", position: 0 },
+              { color: "rgba(167,230,213,0)", position: 55 },
+            ],
+            centerX: 20,
+            centerY: 85,
+          },
+        ]}
+      />
       {/* 层 2：细网格微光（仅首页跑 canvas） */}
       <GridBeam
         className="absolute inset-0 opacity-40"
@@ -42,7 +81,25 @@ export default function Home() {
         <p className="mt-6 max-w-2xl text-lg leading-relaxed text-muted-foreground sm:text-xl">
           AI 产品从 0 到 1 落地 · Agent 与多轮交互 · 智能工作流 · AI 商业化
         </p>
-        <div className="mt-12 grid w-full max-w-3xl grid-cols-2 gap-3 text-left sm:grid-cols-4">
+        {/* 迷你方法流程图：数字圆 + 标题，渐变 hairline 连接 */}
+        <div className="mt-8 flex items-center justify-center gap-2 sm:gap-3">
+          {METHOD.map((step, i) => (
+            <Fragment key={step.title}>
+              <div className="flex flex-col items-center gap-1.5">
+                <span className="flex size-8 items-center justify-center rounded-full bg-gradient-to-br from-brand-1 to-brand-2-vivid font-mono text-[11px] font-semibold text-primary-foreground shadow-[0_0_14px_-6px_var(--brand-glow-orange)]">
+                  {i + 1}
+                </span>
+                <span className="text-xs font-medium text-muted-foreground">
+                  {step.title}
+                </span>
+              </div>
+              {i < METHOD.length - 1 && (
+                <span className="h-px w-4 bg-gradient-to-r from-brand-1/60 to-brand-2-vivid/40 sm:w-6" />
+              )}
+            </Fragment>
+          ))}
+        </div>
+        <div className="mt-8 grid w-full max-w-3xl grid-cols-2 gap-3 text-left sm:grid-cols-4">
           <HubCard
             href="/about"
             icon={User}
