@@ -16,6 +16,15 @@ export type Post = PostMeta & {
   content: string;
 };
 
+// gray-matter 会把 YAML 的 date: 解析成 Date 对象，String(Date) 是星期名字符串，
+// 拿去排序会按字母序而不是日期序。统一转成 "YYYY-MM-DD"。
+function formatDate(value: unknown): string {
+  if (!value) return "";
+  const d = value instanceof Date ? value : new Date(value as string);
+  if (isNaN(d.getTime())) return String(value);
+  return d.toISOString().slice(0, 10);
+}
+
 function readPosts(): Post[] {
   const files = fs.readdirSync(BLOG_DIR).filter((f) => f.endsWith(".md"));
   return files
@@ -25,7 +34,7 @@ function readPosts(): Post[] {
       return {
         slug: file.replace(/\.md$/, ""),
         title: String(data.title ?? file),
-        date: String(data.date ?? ""),
+        date: formatDate(data.date),
         excerpt: String(data.excerpt ?? ""),
         tags: (data.tags as string[]) ?? [],
         content,
