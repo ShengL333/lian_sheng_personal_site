@@ -28,13 +28,21 @@ export const GradientAnimation: React.FC<GradientAnimationProps> = ({
   const controls = useAnimation()
 
   useEffect(() => {
+    const target = gradients.map(
+      (g) =>
+        `radial-gradient(circle at ${g.centerX}% ${g.centerY}%, ${g.stops
+          .map((s) => `${s.color} ${s.position}%`)
+          .join(", ")})`
+    )
+
+    // 尊重系统「减少动效」偏好：只画静态光晕，不启动无限动画
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      controls.set({ background: target })
+      return
+    }
+
     controls.start({
-      background: gradients.map(
-        (g) =>
-          `radial-gradient(circle at ${g.centerX}% ${g.centerY}%, ${g.stops
-            .map((s) => `${s.color} ${s.position}%`)
-            .join(", ")})`
-      ),
+      background: target,
       transition: {
         duration: animationDuration,
         repeat: Infinity,

@@ -1,11 +1,12 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { ArrowLeft } from "lucide-react";
+import { ArrowLeft, Mail } from "lucide-react";
 import Markdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 
 import { TextureOverlay } from "@/components/cult/texture-overlay";
 import { getPost, getPostSlugs } from "@/lib/posts";
+import { EMAIL } from "@/lib/site-data";
 import { Badge } from "@/components/ui/badge";
 
 type PageProps = { params: Promise<{ slug: string }> };
@@ -88,6 +89,26 @@ export default async function BlogPostPage({ params }: PageProps) {
           <article className="prose prose-neutral max-w-none dark:prose-invert prose-headings:tracking-[-0.02em] prose-a:text-primary">
             <Markdown remarkPlugins={[remarkGfm]}>{post.content}</Markdown>
           </article>
+        </div>
+
+        {/* 作者卡 */}
+        <div className="mt-12 rounded-3xl border border-border/60 bg-card/60 p-6 backdrop-blur-sm sm:p-7">
+          <div className="flex flex-wrap items-center justify-between gap-5">
+            <div>
+              <p className="text-base font-semibold tracking-tight">
+                连晟 · AI 产品经理
+              </p>
+              <p className="mt-1.5 max-w-lg text-sm leading-6 text-muted-foreground">
+                聊 AI 产品、Agent 应用与产品设计。这篇文章只是开头——有想法或问题，欢迎直接找我聊。
+              </p>
+            </div>
+            <a
+              href={`mailto:${EMAIL}`}
+              className="inline-flex shrink-0 items-center gap-2 rounded-full bg-gradient-to-br from-brand-1 to-brand-2-vivid px-6 py-2.5 text-sm font-semibold text-primary-foreground shadow-[0_12px_36px_-12px_var(--brand-glow-orange)] transition-transform hover:scale-[1.02]"
+            >
+              <Mail className="size-4" /> 聊一聊
+            </a>
+          </div>
         </div>
       </div>
     </div>

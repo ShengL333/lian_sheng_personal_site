@@ -4,7 +4,7 @@ import { MinimalCard } from "@/components/cult/minimal-card";
 import { TextureOverlay } from "@/components/cult/texture-overlay";
 import { Badge } from "@/components/ui/badge";
 import { EMAIL, skills, strengths } from "@/lib/site-data";
-import portrait from "@/public/pics/portrait.jpg";
+import portrait from "@/public/pics/portrait.webp";
 
 export default function AboutPage() {
   return (

@@ -267,6 +267,9 @@ function useBeamCanvas(
     }
     const dpr = window.devicePixelRatio || 1
 
+    // 尊重系统「减少动效」偏好：只画一帧静止画面，不启动无限 rAF 循环
+    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches
+
     const resize = () => {
       const rect = canvas.getBoundingClientRect()
       canvas.width = rect.width * dpr
@@ -297,7 +300,7 @@ function useBeamCanvas(
       ctx.clearRect(0, 0, w, h)
 
       if (!(active || fadingOut)) {
-        animRef.current = requestAnimationFrame(draw)
+        scheduleFrame()
         return
       }
 
@@ -306,7 +309,7 @@ function useBeamCanvas(
       if (fadingOut && fadeStart) {
         fade = Math.max(0, 1 - (now - fadeStart) / 600)
         if (fade <= 0) {
-          animRef.current = requestAnimationFrame(draw)
+          scheduleFrame()
           return
         }
       } else if (active) {
@@ -509,10 +512,20 @@ function useBeamCanvas(
         }
       }
 
-      animRef.current = requestAnimationFrame(draw)
+      scheduleFrame()
     }
 
-    animRef.current = requestAnimationFrame(draw)
+    const scheduleFrame = () => {
+      if (!reduceMotion) animRef.current = requestAnimationFrame(draw)
+    }
+
+    if (reduceMotion) {
+      // 拨前时间轴，让首帧 fade=1 直接显示静止画面
+      startRef.current = performance.now() - 2000
+      draw(performance.now())
+    } else {
+      scheduleFrame()
+    }
     return () => {
       if (animRef.current !== null) {
         cancelAnimationFrame(animRef.current)
